@@ -1,0 +1,14 @@
+{
+  "assets":[
+    {
+      "name":"Fantasy Sword",
+      "description":"High quality sword model",
+      "file":"sword.png"
+    },
+    {
+      "name":"Game Map",
+      "description":"Open world map asset",
+      "file":"map.zip"
+    }
+  ]
+}
