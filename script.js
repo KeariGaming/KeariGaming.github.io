@@ -10,6 +10,8 @@ fetch("assets.json")
         card.className = "asset-card";
 
         let downloadURL = "";
+        let buttonClass = "download";
+        let buttonText = "Download";
         let downloadAttr = "";
 
         if(asset.file){
@@ -20,11 +22,16 @@ fetch("assets.json")
             downloadURL = asset.link;
         }
 
+        if(asset.popuplink === "true"){
+            buttonClass = "download-popup";
+            buttonText = "Download (Pop Up Link)";
+        }
+
         card.innerHTML = `
             <h3>${asset.name}</h3>
             <p>${asset.description}</p>
-            <a class="download" href="${downloadURL}" ${downloadAttr}>
-            Download
+            <a class="${buttonClass}" href="${downloadURL}" ${downloadAttr}>
+            ${buttonText}
             </a>
         `;
 
