@@ -62,3 +62,9 @@ body{
     text-decoration:none;
     border-radius:5px;
 }
+
+.asset-size{
+    color:#aaa;
+    font-size:14px;
+    margin-top:5px;
+}
