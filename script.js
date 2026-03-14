@@ -3,6 +3,7 @@ fetch("assets.json")
 .then(data => {
 
     const container = document.getElementById("assetList");
+    container.innerHTML = "";
 
     data.assets.forEach(asset => {
 
@@ -14,25 +15,30 @@ fetch("assets.json")
         let buttonText = "Download";
         let downloadAttr = "";
 
-        if(asset.file){
+        if (asset.file) {
             downloadURL = "assets/" + asset.file;
             downloadAttr = "download";
         }
-        else if(asset.link){
+
+        if (asset.link) {
             downloadURL = asset.link;
         }
 
-        if(asset.popuplink === "true"){
+        if (asset.popuplink) {
             buttonClass = "download-popup";
             buttonText = "Download (Pop Up Link)";
         }
 
+        const button = `
+        <a class="${buttonClass}" href="${downloadURL}" ${downloadAttr}>
+        ${buttonText}
+        </a>
+        `;
+
         card.innerHTML = `
             <h3>${asset.name}</h3>
             <p>${asset.description}</p>
-            <a class="${buttonClass}" href="${downloadURL}" ${downloadAttr}>
-            ${buttonText}
-            </a>
+            ${button}
         `;
 
         container.appendChild(card);
