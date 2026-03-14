@@ -52,3 +52,13 @@ body{
     text-decoration:none;
     border-radius:5px;
 }
+
+.download-popup{
+    display:inline-block;
+    margin-top:10px;
+    padding:8px 12px;
+    background:#ff8c2f;
+    color:white;
+    text-decoration:none;
+    border-radius:5px;
+}
