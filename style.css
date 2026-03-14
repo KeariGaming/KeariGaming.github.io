@@ -63,8 +63,14 @@ body{
     border-radius:5px;
 }
 
+.asset-meta{
+    color:#bbb;
+    font-size:13px;
+    margin-top:4px;
+}
+
 .asset-size{
-    color:#aaa;
-    font-size:14px;
-    margin-top:5px;
+    color:#888;
+    font-size:13px;
+    margin-top:2px;
 }
