@@ -1,14 +1,14 @@
 {
   "assets":[
     {
-      "name":"Fantasy Sword",
-      "description":"High quality sword model",
-      "file":"sword.png"
+      "name":"Bad Eggs Online 2 - Community Edition",
+      "description":"BEO2 Client Side Modification made by Keari, introduces new weapons and skins.",
+      "link":"https://exe.io/OxtRPj"
     },
     {
-      "name":"Game Map",
-      "description":"Open world map asset",
-      "file":"map.zip"
+      "name":"Test",
+      "description":"Test",
+      "file":"test.txt"
     }
   ]
 }
