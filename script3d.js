@@ -1,78 +1,54 @@
-import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js";
-import { OBJLoader } from "https://cdn.jsdelivr.net/npm/three@0.158.0/examples/jsm/loaders/OBJLoader.js";;
-
-fetch("3d-assets.json")
-.then(res => res.json())
-.then(data => {
-
-const container = document.getElementById("assetList");
-
-data.assets.forEach(asset => {
-
-const card = document.createElement("div");
-card.className = "asset-card";
-
-const viewer = document.createElement("div");
-viewer.className = "model-viewer";
-
-card.innerHTML = `
-<h3>${asset.name}</h3>
-<p>${asset.description}</p>
-<a class="download" href="models/${asset.file}" download>Download</a>
-`;
-
-card.prepend(viewer);
-container.appendChild(card);
-
-loadModel(viewer, "models/" + asset.file);
-
-});
-
-});
-
-
 function loadModel(container, url){
 
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(
-75,
+60,
 container.clientWidth / 200,
 0.1,
 1000
 );
 
-const renderer = new THREE.WebGLRenderer({alpha:true});
+const renderer = new THREE.WebGLRenderer({alpha:true, antialias:true});
 renderer.setSize(container.clientWidth,200);
-
 container.appendChild(renderer.domElement);
 
-const light = new THREE.DirectionalLight(0xffffff,1);
-light.position.set(2,2,2);
-scene.add(light);
-
-const ambient = new THREE.AmbientLight(0xffffff, 0.7);
+const ambient = new THREE.AmbientLight(0xffffff,0.8);
 scene.add(ambient);
 
-const loader = new OBJLoader();
+const light = new THREE.DirectionalLight(0xffffff,1);
+light.position.set(3,3,3);
+scene.add(light);
 
-loader.load(url,function(object){
+const loader = new THREE.GLTFLoader();
 
-const box = new THREE.Box3().setFromObject(object);
+let model;
+
+loader.load(url,function(gltf){
+
+model = gltf.scene;
+
+const box = new THREE.Box3().setFromObject(model);
 const center = box.getCenter(new THREE.Vector3());
 
-object.position.sub(center);
+model.position.sub(center);
 
-scene.add(object);
+scene.add(model);
 
 });
 
-camera.position.z = 5;
+camera.position.z = 3;
 
 function animate(){
+
 requestAnimationFrame(animate);
-scene.rotation.y += 0.01;
+
+if(model){
+model.rotation.y += 0.01;
+}
+
 renderer.render(scene,camera);
+
 }
 
 animate();
