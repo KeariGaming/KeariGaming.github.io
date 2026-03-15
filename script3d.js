@@ -1,5 +1,5 @@
-import * as THREE from "https://unpkg.com/three@0.158.0/build/three.module.js";
-import { OBJLoader } from "https://unpkg.com/three@0.158.0/examples/jsm/loaders/OBJLoader.js";
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js";
+import { OBJLoader } from "https://cdn.jsdelivr.net/npm/three@0.158.0/examples/jsm/loaders/OBJLoader.js";;
 
 fetch("3d-assets.json")
 .then(res => res.json())
