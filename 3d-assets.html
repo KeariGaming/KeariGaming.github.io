@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 
 <title>Keari 3D Assets</title>
+
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 <style>
@@ -58,46 +59,27 @@ color:#aaa;
 </head>
 <body>
 
+<h1>3D Assets</h1>
+
 <div id="assetList"></div>
 
 <script>
-    fetch("3d-assets.json")
-.then(res => res.json())
-.then(data => {
 
-const container = document.getElementById("assetList");
+fetch("3d-assets.json")
+.then(res=>res.json())
+.then(data=>{
 
-data.assets.forEach(asset => {
+const container=document.getElementById("assetList");
 
-let modelURL = "";
-let downloadURL = "";
-let buttonClass = "download";
-let buttonText = "Download";
-let downloadAttr = "";
+data.assets.forEach(asset=>{
 
-if(asset.file){
-    modelURL = "models/" + asset.file;
-    downloadURL = "models/" + asset.file;
-    downloadAttr = "download";
-}
+const card=document.createElement("div");
+card.className="asset-card";
 
-if(asset.link){
-    modelURL = asset.link;
-    downloadURL = asset.link;
-}
-
-if(asset.popuplink){
-    buttonClass = "download-popup";
-    buttonText = "Download (Pop Up Link)";
-}
-
-const card = document.createElement("div");
-card.className = "asset-card";
-
-card.innerHTML = `
+card.innerHTML=`
 
 <model-viewer
-src="${modelURL}"
+src="models/${asset.file}"
 camera-controls
 auto-rotate
 shadow-intensity="1">
@@ -107,10 +89,10 @@ shadow-intensity="1">
 
 <p>${asset.description}</p>
 
-<div class="size">${asset.size || ""}</div>
+<div class="size">${asset.size}</div>
 
-<a class="${buttonClass}" href="${downloadURL}" ${downloadAttr}>
-${buttonText}
+<a class="download" href="models/${asset.file}" download>
+Download
 </a>
 
 `;
@@ -121,9 +103,7 @@ container.appendChild(card);
 
 });
 
-animate();
-
-}
 </script>
+
 </body>
 </html>
