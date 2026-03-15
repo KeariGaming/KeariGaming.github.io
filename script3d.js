@@ -1,63 +1,27 @@
+// script3d.js
 fetch("3d-assets.json")
 .then(res => res.json())
 .then(data => {
+    const container = document.getElementById("assetList");
 
-const container = document.getElementById("assetList");
+    data.assets.forEach(asset => {
+        const card = document.createElement("div");
+        card.className = "asset-card";
 
-data.assets.forEach(asset => {
+        card.innerHTML = `
+        <model-viewer class="model-viewer"
+            src="models/${asset.file}"
+            camera-controls
+            auto-rotate
+            shadow-intensity="1">
+        </model-viewer>
 
-let modelURL = "";
-let downloadURL = "";
-let buttonClass = "download";
-let buttonText = "Download";
-let downloadAttr = "";
+        <h3>${asset.name}</h3>
+        <p>${asset.description}</p>
+        <div class="asset-size">${asset.size}</div>
+        <a class="download" href="models/${asset.file}" download>Download</a>
+        `;
 
-if(asset.file){
-    modelURL = "models/" + asset.file;
-    downloadURL = "models/" + asset.file;
-    downloadAttr = "download";
-}
-
-if(asset.link){
-    modelURL = asset.link;
-    downloadURL = asset.link;
-}
-
-if(asset.popuplink){
-    buttonClass = "download-popup";
-    buttonText = "Download (Pop Up Link)";
-}
-
-const card = document.createElement("div");
-card.className = "asset-card";
-
-card.innerHTML = `
-
-<model-viewer
-src="${modelURL}"
-camera-controls
-auto-rotate
-shadow-intensity="1">
-</model-viewer>
-
-<h3>${asset.name}</h3>
-
-<p>${asset.description}</p>
-
-<div class="size">${asset.size || ""}</div>
-
-<a class="${buttonClass}" href="${downloadURL}" ${downloadAttr}>
-${buttonText}
-</a>
-
-`;
-
-container.appendChild(card);
-
+        container.appendChild(card);
+    });
 });
-
-});
-
-animate();
-
-}
