@@ -2,11 +2,19 @@
   "assets":[
     {
       "name":"Pumpkin Pikachu",
-      "description":"BMGO Asset - .FBX / .MESH / .EFFECT Provided",
+      "description":"BMGO Asset - .fbx + .mesh + .effect",
       "size":"~ 1 MB",
       "file":"pumpkinpikachu.glb",
       "popuplink":"true",
       "link":"https://exe.io/1aZhNcZ"
-    }  
+    },
+    {
+      "name":"Pumpkin Witch",
+      "description":"BMGO Asset - .fbx + .mesh",
+      "size":"~ 1 MB",
+      "file":"pumpkinwitch.glb",
+      "popuplink":"true",
+      "link":"https://exe.io/1aZhNcZ"
+    }
   ]
 }
