@@ -51,7 +51,7 @@ scene.add(light);
 const ambient = new THREE.AmbientLight(0xffffff, 0.7);
 scene.add(ambient);
 
-const loader = new THREE.OBJLoader();
+const loader = new OBJLoader();
 
 loader.load(url,function(object){
 
