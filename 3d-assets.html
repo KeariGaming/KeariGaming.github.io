@@ -2,145 +2,36 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>3D Assets</title>
+
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 <style>
-
 body{
-    background:#111;
-    color:white;
-    font-family:Arial;
-    padding:40px;
+background:#111;
+color:white;
+font-family:Arial;
+text-align:center;
+padding:40px;
 }
 
-.asset-card{
-    background:#1b1b1b;
-    padding:20px;
-    margin-bottom:20px;
-    border-radius:8px;
-    width:400px;
+model-viewer{
+width:400px;
+height:300px;
+margin:auto;
 }
-
-.viewer{
-    width:100%;
-    height:250px;
-}
-
-.download{
-    display:inline-block;
-    margin-top:10px;
-    padding:8px 14px;
-    background:#3b82f6;
-    color:white;
-    text-decoration:none;
-    border-radius:4px;
-}
-
 </style>
 
 </head>
 <body>
 
-<h1>3D Assets</h1>
+<h1>3D Test</h1>
 
-<div id="assetList"></div>
-
-<script type="module">
-
-import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
-import { GLTFLoader } from "https://unpkg.com/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";
-
-fetch("3d-assets.json")
-.then(res=>res.json())
-.then(data=>{
-
-const container=document.getElementById("assetList");
-
-data.assets.forEach(asset=>{
-
-const card=document.createElement("div");
-card.className="asset-card";
-
-const viewer=document.createElement("div");
-viewer.className="viewer";
-
-card.innerHTML=`
-<h3>${asset.name}</h3>
-<p>${asset.description}</p>
-`;
-
-card.appendChild(viewer);
-
-const button=document.createElement("a");
-button.className="download";
-button.href="models/"+asset.file;
-button.download="";
-button.textContent="Download";
-
-card.appendChild(button);
-
-container.appendChild(card);
-
-loadModel(viewer,"models/"+asset.file);
-
-});
-
-});
-
-function loadModel(container,url){
-
-const scene=new THREE.Scene();
-
-const camera=new THREE.PerspectiveCamera(
-60,
-container.clientWidth/container.clientHeight,
-0.1,
-1000
-);
-
-const renderer=new THREE.WebGLRenderer({alpha:true,antialias:true});
-renderer.setSize(container.clientWidth,container.clientHeight);
-container.appendChild(renderer.domElement);
-
-const light=new THREE.AmbientLight(0xffffff,1);
-scene.add(light);
-
-const loader=new GLTFLoader();
-
-let model;
-
-loader.load(url,(gltf)=>{
-
-model=gltf.scene;
-
-const box=new THREE.Box3().setFromObject(model);
-const center=box.getCenter(new THREE.Vector3());
-
-model.position.sub(center);
-
-scene.add(model);
-
-});
-
-camera.position.z=3;
-
-function animate(){
-
-requestAnimationFrame(animate);
-
-if(model){
-model.rotation.y+=0.01;
-}
-
-renderer.render(scene,camera);
-
-}
-
-animate();
-
-}
-
-</script>
+<model-viewer
+src="models/pumpkinpikachu.glb"
+camera-controls
+auto-rotate
+shadow-intensity="1"
+></model-viewer>
 
 </body>
 </html>
