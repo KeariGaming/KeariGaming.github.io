@@ -16,17 +16,20 @@ fetch("assets.json")
         let downloadAttr = "";
         let sizeText = "Loading...";
         let extensionText = "Unknown";
+        let thumbnailHTML = "";
+
+        if (asset.thumbnail) {
+            thumbnailHTML = `<img class="asset-thumb" src="thumbnails/${asset.thumbnail}">`;
+        }
 
         if (asset.file) {
             downloadURL = "assets/" + asset.file;
             downloadAttr = "download";
 
-            // Detect extension automatically
             const parts = asset.file.split(".");
             const ext = parts[parts.length - 1].toUpperCase();
             extensionText = "." + ext + " File";
 
-            // Get file size
             fetch(downloadURL, { method: "HEAD" })
             .then(res => {
                 const bytes = res.headers.get("Content-Length");
@@ -59,6 +62,7 @@ fetch("assets.json")
         `;
 
         card.innerHTML = `
+            ${thumbnailHTML}
             <h3>${asset.name}</h3>
             <p>${asset.description}</p>
             <p class="asset-meta">${extensionText}</p>
