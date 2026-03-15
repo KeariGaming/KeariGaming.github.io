@@ -2,107 +2,52 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
 <title>Keari 3D Assets</title>
-
+<link rel="stylesheet" href="style.css">
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-
-<style>
-
-body{
-background:#111;
-color:white;
-font-family:Arial;
-padding:40px;
-}
-
-#assetList{
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
-gap:25px;
-}
-
-.asset-card{
-background:#1b1b1b;
-padding:18px;
-border-radius:8px;
-}
-
-.asset-card h3{
-margin-top:10px;
-}
-
-model-viewer{
-width:100%;
-height:220px;
-background:#000;
-border-radius:6px;
-}
-
-.download{
-display:inline-block;
-margin-top:10px;
-padding:8px 14px;
-background:#3b82f6;
-color:white;
-text-decoration:none;
-border-radius:5px;
-}
-
-.size{
-font-size:12px;
-color:#aaa;
-}
-
-</style>
-
 </head>
+
 <body>
 
-<h1>3D Assets</h1>
+<div class="sidebar">
+    <h2><a href="index.html" class="home-link">Keari's File Archive</a></h2>
+    <a href="assets.html">Assets</a>
+    <a href="3d-assets.html">3D Assets</a>
+</div>
 
-<div id="assetList"></div>
+<div class="content">
+    <h1>3D Assets</h1>
+
+    <div id="assetList"></div>
+</div>
 
 <script>
-
 fetch("3d-assets.json")
-.then(res=>res.json())
-.then(data=>{
+.then(res => res.json())
+.then(data => {
+    const container = document.getElementById("assetList");
 
-const container=document.getElementById("assetList");
+    data.assets.forEach(asset => {
+        const card = document.createElement("div");
+        card.className = "asset-card";
 
-data.assets.forEach(asset=>{
+        card.innerHTML = `
+        <model-viewer class="model-viewer"
+            src="models/${asset.file}"
+            camera-controls
+            auto-rotate
+            shadow-intensity="1">
+        </model-viewer>
 
-const card=document.createElement("div");
-card.className="asset-card";
+        <h3>${asset.name}</h3>
+        <p>${asset.description}</p>
+        <div class="asset-size">${asset.size}</div>
+        <a class="download" href="models/${asset.file}" download>Download</a>
+        `;
 
-card.innerHTML=`
-
-<model-viewer
-src="models/${asset.file}"
-camera-controls
-auto-rotate
-shadow-intensity="1">
-</model-viewer>
-
-<h3>${asset.name}</h3>
-
-<p>${asset.description}</p>
-
-<div class="size">${asset.size}</div>
-
-<a class="download" href="models/${asset.file}" download>
-Download
-</a>
-
-`;
-
-container.appendChild(card);
-
+        container.appendChild(card);
+    });
 });
-
-});
-
 </script>
 
 </body>
