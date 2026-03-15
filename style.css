@@ -83,3 +83,10 @@ body{
 .home-link:hover{
     color:#ccc;
 }
+
+.asset-thumb{
+    width:100%;
+    max-width:220px;
+    border-radius:6px;
+    margin-bottom:10px;
+}
