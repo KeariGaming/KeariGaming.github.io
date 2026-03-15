@@ -74,3 +74,12 @@ body{
     font-size:13px;
     margin-top:2px;
 }
+
+.home-link{
+    text-decoration:none;
+    color:white;
+}
+
+.home-link:hover{
+    color:#ccc;
+}
