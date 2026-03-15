@@ -23,7 +23,7 @@ const light = new THREE.DirectionalLight(0xffffff,1);
 light.position.set(3,3,3);
 scene.add(light);
 
-const loader = new THREE.GLTFLoader();
+const loader = new GLTFLoader();
 
 let model;
 
