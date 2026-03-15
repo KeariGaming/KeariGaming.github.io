@@ -1,3 +1,6 @@
+import * as THREE from "./libs/three.tsl.min.js";
+import { GLTFLoader } from "./libs/GLTFLoader.js";
+
 function loadModel(container, url){
 
 const scene = new THREE.Scene();
