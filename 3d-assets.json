@@ -3,7 +3,10 @@
     {
       "name":"Pumpkin Pikachu",
       "description":"Blockman GO Halloween Exclusive Pet",
-      "file":"pumpkinpikachu.glb"
+      "size":"~ 1 MB",
+      "file":"pumpkinpikachu.glb",
+      "popuplink":"true",
+      "link":"youtube.com"
     }  
   ]
 }
