@@ -48,16 +48,23 @@ const light = new THREE.DirectionalLight(0xffffff,1);
 light.position.set(2,2,2);
 scene.add(light);
 
+const ambient = new THREE.AmbientLight(0xffffff, 0.7);
+scene.add(ambient);
+
 const loader = new THREE.OBJLoader();
 
 loader.load(url,function(object){
 
+const box = new THREE.Box3().setFromObject(object);
+const center = box.getCenter(new THREE.Vector3());
+
+object.position.sub(center);
+
 scene.add(object);
-object.rotation.x = -0.5;
 
 });
 
-camera.position.z = 3;
+camera.position.z = 5;
 
 function animate(){
 requestAnimationFrame(animate);
