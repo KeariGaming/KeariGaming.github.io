@@ -1,58 +1,62 @@
-import * as THREE from "./libs/three.tsl.min.js";
-import { GLTFLoader } from "./libs/GLTFLoader.js";
+fetch("3d-assets.json")
+.then(res => res.json())
+.then(data => {
 
-function loadModel(container, url){
+const container = document.getElementById("assetList");
 
-const scene = new THREE.Scene();
+data.assets.forEach(asset => {
 
-const camera = new THREE.PerspectiveCamera(
-60,
-container.clientWidth / 200,
-0.1,
-1000
-);
+let modelURL = "";
+let downloadURL = "";
+let buttonClass = "download";
+let buttonText = "Download";
+let downloadAttr = "";
 
-const renderer = new THREE.WebGLRenderer({alpha:true, antialias:true});
-renderer.setSize(container.clientWidth,200);
-container.appendChild(renderer.domElement);
+if(asset.file){
+    modelURL = "models/" + asset.file;
+    downloadURL = "models/" + asset.file;
+    downloadAttr = "download";
+}
 
-const ambient = new THREE.AmbientLight(0xffffff,0.8);
-scene.add(ambient);
+if(asset.link){
+    modelURL = asset.link;
+    downloadURL = asset.link;
+}
 
-const light = new THREE.DirectionalLight(0xffffff,1);
-light.position.set(3,3,3);
-scene.add(light);
+if(asset.popuplink){
+    buttonClass = "download-popup";
+    buttonText = "Download (Pop Up Link)";
+}
 
-const loader = new GLTFLoader();
+const card = document.createElement("div");
+card.className = "asset-card";
 
-let model;
+card.innerHTML = `
 
-loader.load(url,function(gltf){
+<model-viewer
+src="${modelURL}"
+camera-controls
+auto-rotate
+shadow-intensity="1">
+</model-viewer>
 
-model = gltf.scene;
+<h3>${asset.name}</h3>
 
-const box = new THREE.Box3().setFromObject(model);
-const center = box.getCenter(new THREE.Vector3());
+<p>${asset.description}</p>
 
-model.position.sub(center);
+<div class="size">${asset.size || ""}</div>
 
-scene.add(model);
+<a class="${buttonClass}" href="${downloadURL}" ${downloadAttr}>
+${buttonText}
+</a>
+
+`;
+
+container.appendChild(card);
 
 });
 
-camera.position.z = 3;
-
-function animate(){
-
-requestAnimationFrame(animate);
-
-if(model){
-model.rotation.y += 0.01;
-}
-
-renderer.render(scene,camera);
-
-}
+});
 
 animate();
 
