@@ -57,7 +57,7 @@ fetch("3d-assets.json")
         .then(res => res.json())
         .then(data => {
 
-            const downloads = data.count || 0;
+            const downloads = data.data.up_count || 0;
             counterElement.innerText = downloads + " downloads";
 
         })
