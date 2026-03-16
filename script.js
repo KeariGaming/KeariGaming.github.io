@@ -67,10 +67,37 @@ fetch("assets.json")
             <p>${asset.description}</p>
             <p class="asset-meta">${extensionText}</p>
             <p class="asset-size">${sizeText}</p>
+            <p class="downloads">Loading downloads...</p>
             ${button}
         `;
 
         container.appendChild(card);
+
+        // Counter ID (use id if defined, otherwise filename)
+        const counterId = asset.id || asset.file || asset.link;
+
+        const counterElement = card.querySelector(".downloads");
+        const buttonElement = card.querySelector("a");
+
+        // Fetch current download count
+        fetch(`https://api.counterapi.dev/v2/keari_archive/${counterId}`)
+        .then(res => res.json())
+        .then(data => {
+
+            const downloads = data.data.up_count || 0;
+            counterElement.innerText = downloads + " downloads";
+
+        })
+        .catch(() => {
+            counterElement.innerText = "0 downloads";
+        });
+
+        // Increment counter when download button is clicked
+        buttonElement.addEventListener("click", () => {
+
+            fetch(`https://api.counterapi.dev/v2/keari_archive/${counterId}/up`);
+
+        });
 
     });
 
