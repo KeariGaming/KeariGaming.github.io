@@ -10,5 +10,14 @@
       "thumbnail":"beopumpkin.png",
       "id":"beo2patch"
     }
+    {
+      "name":"Bad Eggs Online 2 - PC Port",
+      "description":"BEO2 PC Port, functions properly on Windows.",
+      "link":"https://exe.io/9ec3A",
+      "popuplink":"true",
+      "size":"28 MB",
+      "extension":".EXE (Setup Wizard)",
+      "id":"beo2pc"
+    }
   ]
 }
