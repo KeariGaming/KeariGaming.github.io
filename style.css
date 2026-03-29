@@ -98,9 +98,11 @@ margin-top:6px;
 .asset-thumb{
     width:100%;
     height:140px;
-    object-fit:cover;
+    object-fit:contain;
+    object-position:center;
     border-radius:6px;
     margin-bottom:10px;
+    background:#111;
 }
 
 .model-viewer{
