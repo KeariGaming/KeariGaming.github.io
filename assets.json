@@ -17,6 +17,24 @@
       "extension":".EXE (Setup Wizard)",
       "thumbnail":"beo2icon.png",
       "id":"beo2pc"
+    },
+    {
+      "name":"Bad Eggs Online 2 - Hybrid Edition for PC/Windows",
+      "description":"BEO2 Hybrid Server Mod for PC's.",
+      "link":"https://www.mediafire.com/file/75q04w26pkag5tk/BEO2HybridSetup.exe/file",
+      "size":"28 MB",
+      "extension":".EXE (Setup Wizard)",
+      "thumbnail":"smokey.png",
+      "id":"hybridPC"
+    },
+    {
+      "name":"Bad Eggs Online 2 - Hybrid Edition for Android",
+      "description":"BEO2 Hybrid Server Mod for mobile devices.",
+      "link":"https://www.mediafire.com/file/l8hxy4fluxa77ev/BEO2HybridEdition.apk/file",
+      "size":"45 MB",
+      "extension":".APK Android Package Kit",
+      "thumbnail":"invisible.png",
+      "id":"hybridANDROID"
     }
   ]
 }
