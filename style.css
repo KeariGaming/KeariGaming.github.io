@@ -12,6 +12,14 @@ body{
     background:#181818;
     padding:20px;
 }
+.discord-btn {
+    background-color: #5865F2;
+    color: white;
+    padding: 10px 16px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+}
 
 .downloads{
 font-size:12px;
